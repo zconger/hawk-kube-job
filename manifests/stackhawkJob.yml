@@ -1,7 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pi
+  name: stackhawk
+  namespace: stackhawk
 spec:
   template:
     spec:
@@ -9,8 +10,9 @@ spec:
         - name: hawkscan
           image: stackhawk/hawkscan:latest
           imagePullPolicy: Always
-#          securityContext:
-#            runAsUser: 0
+          command:
+            - shawk
+            - stackhawk.d/stackhawk.yml
           env:
             - name: API_KEY
               valueFrom:
